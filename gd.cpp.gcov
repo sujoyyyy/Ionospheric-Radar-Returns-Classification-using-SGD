@@ -1,0 +1,366 @@
+        -:    0:Source:gd.cpp
+        -:    0:Graph:gd.gcno
+        -:    0:Data:gd.gcda
+        -:    0:Runs:1
+        -:    1:#include <bits/stdc++.h>
+        -:    2:#include <iostream>
+        -:    3:#include <string>
+        -:    4:#include <iomanip>
+        -:    5:#include <omp.h>
+        -:    6:#include <sstream>
+        -:    7:#include <fstream>
+        -:    8:using namespace std;
+        -:    9:
+        -:   10://Variables for obtaining line of best fit
+        -:   11:double b0 = 0; 
+        -:   12:double b1 = 0; 
+        -:   13:double b2 = 0; 
+        -:   14:double b3 = 0; 
+        -:   15:
+        -:   16://Swapping function
+function _Z4swapPdS_ called 64557373 returned 100% blocks executed 100%
+ 64557373:   17:void swap(double *xp, double *yp) 
+        -:   18:{ 
+ 64557373:   19:    double temp = *xp; 
+ 64557373:   20:    *xp = *yp; 
+ 64557373:   21:    *yp = temp; 
+ 64557373:   22:} 
+        -:   23:
+        -:   24:
+        -:   25:// A function to implement bubble sort 
+function _Z10bubbleSortPdi called 1 returned 100% blocks executed 100%
+        1:   26:void bubbleSort(double arr[], int n) 
+        -:   27:{ 
+        -:   28:    int i, j; 
+    17550:   29:    for (i = 0; i < n-1; i++)     
+branch  0 taken 17549 (fallthrough)
+branch  1 taken 1
+        -:   30:      
+        -:   31:    //Absolute swapping mechanism
+154010024:   32:    for (j = 0; j < n-i-1; j++) 
+branch  0 taken 153992475 (fallthrough)
+branch  1 taken 17549
+153992475:   33:        if (abs(arr[j]) > abs(arr[j+1])) 
+call    0 returned 153992475
+call    1 returned 153992475
+branch  2 taken 64557373 (fallthrough)
+branch  3 taken 89435102
+ 64557373:   34:            swap(&arr[j], &arr[j+1]); 
+call    0 returned 64557373
+        1:   35:} 
+        -:   36:
+        -:   37:
+        -:   38://Training using the obtained data set
+function _Z5trainPdS_S_S_ called 1 returned 100% blocks executed 100%
+        1:   39:void train(double *x1,double *x2,double *x3,double *y) 
+        -:   40:{
+        -:   41:    double error[17550]; // for storing the error values
+        -:   42:    double err;          // for calculating error on each stage
+        1:   43:    double alpha = 0.01; // initializing our learning rate
+        1:   44:    double e = 2.718281828;
+        -:   45:
+        -:   46:    /*Training Phase*/
+    17551:   47:    for (int i = 0; i < 17550; i++) 
+branch  0 taken 17550 (fallthrough)
+branch  1 taken 1
+        -:   48:    { //Since there are 350 values in our dataset and we want to run for 50 batches so total for loop run 17550 times
+        -:   49:
+        -:   50:        //for accessing index after every batch
+    17550:   51:        int idx = i % 50; 
+        -:   52:
+        -:   53:        //making the prediction
+    17550:   54:        double p = -(b0 + b1 * x1[idx] + b2 * x2[idx] + b3 * x3[idx]);
+        -:   55:
+        -:   56:        //calculating final prediction applying sigmoid 
+    17550:   57:        double pred = 1 / (1 + pow(e, p)); 
+        -:   58:
+    17550:   59:        err = y[idx] - pred; //calculating the error
+        -:   60:
+        -:   61:        //obtaining the line of best fit
+    17550:   62:        b0 = b0 - alpha * err * pred * (1 - pred) * 1.0;     //updating b0
+    17550:   63:        b1 = b1 + alpha * err * pred * (1 - pred) * x1[idx]; //updating b1
+    17550:   64:        b2 = b2 + alpha * err * pred * (1 - pred) * x2[idx]; //updating b2
+    17550:   65:        b3 = b3 + alpha * err * pred * (1 - pred) * x3[idx]; //updating b3
+        -:   66:
+        -:   67:
+        -:   68:        //printing values for each training step
+    17550:   69:        cout << "\tB0= " << b0 << " " << "\t\tB1= " << b1 << " " << "\t\tB2= " << b2 << "\t\tB3= " << b3 << "\t\tError=" << err << endl; 
+call    0 returned 17550
+branch  1 taken 17550 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 17550
+branch  4 taken 17550 (fallthrough)
+branch  5 taken 0 (throw)
+call    6 returned 17550
+branch  7 taken 17550 (fallthrough)
+branch  8 taken 0 (throw)
+call    9 returned 17550
+branch 10 taken 17550 (fallthrough)
+branch 11 taken 0 (throw)
+call   12 returned 17550
+branch 13 taken 17550 (fallthrough)
+branch 14 taken 0 (throw)
+call   15 returned 17550
+branch 16 taken 17550 (fallthrough)
+branch 17 taken 0 (throw)
+call   18 returned 17550
+branch 19 taken 17550 (fallthrough)
+branch 20 taken 0 (throw)
+call   21 returned 17550
+branch 22 taken 17550 (fallthrough)
+branch 23 taken 0 (throw)
+call   24 returned 17550
+branch 25 taken 17550 (fallthrough)
+branch 26 taken 0 (throw)
+call   27 returned 17550
+branch 28 taken 17550 (fallthrough)
+branch 29 taken 0 (throw)
+call   30 returned 17550
+branch 31 taken 17550 (fallthrough)
+branch 32 taken 0 (throw)
+call   33 returned 17550
+branch 34 taken 17550 (fallthrough)
+branch 35 taken 0 (throw)
+call   36 returned 17550
+branch 37 taken 17550 (fallthrough)
+branch 38 taken 0 (throw)
+    17550:   70:        error[i]=err;
+        -:   71:    }
+        -:   72:
+        -:   73:    //custom sort based on absolute error difference
+        1:   74:    bubbleSort(error,17550); 
+call    0 returned 1
+        -:   75:
+        -:   76:
+        1:   77:    cout << "Final Values are: " << "\tB0=" << b0 << " " << "\tB1=" << b1 << " " << "\tB2=" << b2 << "\tB3=" << b3 <<"\tError=" << error[0]<<endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+call   15 returned 1
+branch 16 taken 1 (fallthrough)
+branch 17 taken 0 (throw)
+call   18 returned 1
+branch 19 taken 1 (fallthrough)
+branch 20 taken 0 (throw)
+call   21 returned 1
+branch 22 taken 1 (fallthrough)
+branch 23 taken 0 (throw)
+call   24 returned 1
+branch 25 taken 1 (fallthrough)
+branch 26 taken 0 (throw)
+call   27 returned 1
+branch 28 taken 1 (fallthrough)
+branch 29 taken 0 (throw)
+call   30 returned 1
+branch 31 taken 1 (fallthrough)
+branch 32 taken 0 (throw)
+call   33 returned 1
+branch 34 taken 1 (fallthrough)
+branch 35 taken 0 (throw)
+call   36 returned 1
+branch 37 taken 1 (fallthrough)
+branch 38 taken 0 (throw)
+call   39 returned 1
+branch 40 taken 1 (fallthrough)
+branch 41 taken 0 (throw)
+        -:   78:
+        1:   79:}
+        -:   80:
+        -:   81://Testing the trained Stochastic Model
+function _Z4testddd called 1 returned 100% blocks executed 90%
+        1:   82:void test(double test1, double test2, double test3) 
+        -:   83:{
+        -:   84:    //make prediction
+        1:   85:    double pred = b0 + b1 * test1 + b2 * test2 + b3*test3;
+        -:   86:    char ch;
+        -:   87:
+        1:   88:    cout << "The value predicted by the model= " << pred << endl;
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:   89:    if (pred > 0.5)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        -:   90:    {
+        1:   91:        pred = 1;
+        1:   92:        ch='g';
+        -:   93:    }
+        -:   94:    else
+        -:   95:    {
+    #####:   96:        pred = 0;
+    #####:   97:        ch='b';
+        -:   98:    }
+        1:   99:    cout << "The class predicted by the model= " << ch<<endl;
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:  100:}
+        -:  101:
+function main called 1 returned 100% blocks executed 72%
+        1:  102:int main() 
+        -:  103:{
+        -:  104:    //Input dataset arrays
+        -:  105:    double x1[351];
+        -:  106:    double x2[351];
+        -:  107:    double x3[351];
+        -:  108:    double y[351];
+        -:  109:
+        -:  110:    //Reading the data file
+        1:  111:    FILE* fp = fopen("ionosphere_data.csv", "r");
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  112:    char buffer[1024]; int i=0;
+        1:  113:    int row = 0; int column = 0;
+      353:  114:    while (fgets(buffer,1024, fp)) 
+call    0 returned 353
+branch  1 taken 353 (fallthrough)
+branch  2 taken 0 (throw)
+branch  3 taken 352 (fallthrough)
+branch  4 taken 1
+        -:  115:    {
+      352:  116:       column = 0;
+      352:  117:       row++;
+      352:  118:       if (row == 1)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 351
+        1:  119:           continue;
+        -:  120:
+        -:  121:       // Splitting the data
+      351:  122:       char* value = strtok(buffer, ",");
+call    0 returned 351
+        -:  123:
+     1755:  124:       while (value) 
+branch  0 taken 1404 (fallthrough)
+branch  1 taken 351
+        -:  125:       {
+        -:  126:           // Column 1
+     1404:  127:           if (column == 0) 
+branch  0 taken 351 (fallthrough)
+branch  1 taken 1053
+        -:  128:           {
+      351:  129:               x1[i]=stod(value);
+call    0 returned 351
+call    1 returned 351
+branch  2 taken 351 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 351
+branch  5 taken 351 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 351
+call    8 returned 351
+call    9 never executed
+call   10 never executed
+        -:  130:           }
+        -:  131:           // Column 2
+     1404:  132:           if (column == 1) 
+branch  0 taken 351 (fallthrough)
+branch  1 taken 1053
+        -:  133:           {
+      351:  134:               x2[i]=stod(value);
+call    0 returned 351
+call    1 returned 351
+branch  2 taken 351 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 351
+branch  5 taken 351 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 351
+call    8 returned 351
+call    9 never executed
+call   10 never executed
+        -:  135:           }
+        -:  136:           // Column 3
+     1404:  137:           if (column ==2)
+branch  0 taken 351 (fallthrough)
+branch  1 taken 1053
+        -:  138:           {
+      351:  139:               x3[i]=stod(value);
+call    0 returned 351
+call    1 returned 351
+branch  2 taken 351 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 351
+branch  5 taken 351 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 351
+call    8 returned 351
+call    9 never executed
+call   10 never executed
+        -:  140:           }
+        -:  141:           // Column 4
+     1404:  142:           if (column == 3) 
+branch  0 taken 351 (fallthrough)
+branch  1 taken 1053
+        -:  143:           {
+      351:  144:                if (value=="g")
+branch  0 taken 0 (fallthrough)
+branch  1 taken 351
+        -:  145:                {
+    #####:  146:                    y[i]=1.0;   
+        -:  147:                }
+        -:  148:                else
+        -:  149:                {
+      351:  150:                    y[i]=0.0;
+        -:  151:                }
+      351:  152:                i++;
+        -:  153:           }
+     1404:  154:           value = strtok(NULL, ",");
+call    0 returned 1404
+     1404:  155:           column++;
+        -:  156:       }
+        -:  157:}
+        -:  158:     
+        -:  159:    //Close the file
+        1:  160:    fclose(fp);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  161:
+        -:  162:
+        -:  163:    double start,end;
+        1:  164:    start=omp_get_wtime();
+call    0 returned 1
+        -:  165:    //Training Phase
+        1:  166:    train(x1, x2,x3, y);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  167:    end=omp_get_wtime();
+call    0 returned 1
+        -:  168:
+        -:  169:    //Testing Phase
+        1:  170:    double test1=0.5131, test2=-0.00015, test3=0.52099; 
+        1:  171:    test(test1, test2, test3);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  172:
+        -:  173:    //Time Taken
+        1:  174:    cout<<"Time "<<end-start<<" seconds"<<endl;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:  175:    return 0;
+        -:  176:}
