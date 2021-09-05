@@ -57,16 +57,17 @@ void train(double *x1,double *x2,double *x3,double *y)
         double pred = 1 / (1 + pow(e, p)); 
 
         err = y[idx] - pred; //calculating the error
-
-        //obtaining the line of best fit
-        b0 = b0 - alpha * err * pred * (1 - pred) * 1.0;     //updating b0
-        b1 = b1 + alpha * err * pred * (1 - pred) * x1[idx]; //updating b1
-        b2 = b2 + alpha * err * pred * (1 - pred) * x2[idx]; //updating b2
-        b3 = b3 + alpha * err * pred * (1 - pred) * x3[idx]; //updating b3
-
+        for (int j = 0; j < 100000; ++j)
+        {
+            //obtaining the line of best fit
+            b0 = b0 - alpha * err * pred * (1 - pred) * 1.0;     //updating b0
+            b1 = b1 + alpha * err * pred * (1 - pred) * x1[idx]; //updating b1
+            b2 = b2 + alpha * err * pred * (1 - pred) * x2[idx]; //updating b2
+            b3 = b3 + alpha * err * pred * (1 - pred) * x3[idx]; //updating b3
+        }
 
         //printing values for each training step
-        cout << "\tB0= " << b0 << " " << "\t\tB1= " << b1 << " " << "\t\tB2= " << b2 << "\t\tB3= " << b3 << "\t\tError=" << err << endl; 
+        //cout << "\tB0= " << b0 << " " << "\t\tB1= " << b1 << " " << "\t\tB2= " << b2 << "\t\tB3= " << b3 << "\t\tError=" << err << endl; 
         error[i]=err;
     }
 
