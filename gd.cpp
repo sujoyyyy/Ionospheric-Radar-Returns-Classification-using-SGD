@@ -37,46 +37,38 @@ void bubbleSort(double arr[], int n)
 
 //Training using the obtained data set
 void train(double *x1,double *x2,double *x3,double *y) 
-{
-    double error[17550]; // for storing the error values
+{   
+    double start,end;
+    int i,idx;double error[3861]; // for storing the error values
+    //Since there are 351 values in our dataset and we want to run for 50 batches so total for loop run 17550 times
     double err;          // for calculating error on each stage
     double alpha = 0.01; // initializing our learning rate
     double e = 2.718281828;
-
-    /*Training Phase*/
-    for (int i = 0; i < 17550; i++) 
-    { //Since there are 350 values in our dataset and we want to run for 50 batches so total for loop run 17550 times
-
-        //for accessing index after every batch
-        int idx = i % 50; 
-
-        //making the prediction
-        double p = -(b0 + b1 * x1[idx] + b2 * x2[idx] + b3 * x3[idx]);
-
-        //calculating final prediction applying sigmoid 
-        double pred = 1 / (1 + pow(e, p)); 
-
+    double p=0,pred=0.5;
+    start=omp_get_wtime();
+    #pragma omp parallel for  
+    for (i = 0; i < 3861; i++) 
+    {   
+        idx = i % 11;//for accessing index after every batch
+        p = -(b0 + b1 * x1[idx] + b2 * x2[idx] + b3 * x3[idx]);//making the prediction
+        pred = 1 / (1 + pow(e, p)); //calculating final prediction applying sigmoid 
         err = y[idx] - pred; //calculating the error
-        for (int j = 0; j < 100000; ++j)
+        for(int j=0;j<10000;j++)
         {
-            //obtaining the line of best fit
             b0 = b0 - alpha * err * pred * (1 - pred) * 1.0;     //updating b0
             b1 = b1 + alpha * err * pred * (1 - pred) * x1[idx]; //updating b1
             b2 = b2 + alpha * err * pred * (1 - pred) * x2[idx]; //updating b2
             b3 = b3 + alpha * err * pred * (1 - pred) * x3[idx]; //updating b3
         }
-
-        //printing values for each training step
-        //cout << "\tB0= " << b0 << " " << "\t\tB1= " << b1 << " " << "\t\tB2= " << b2 << "\t\tB3= " << b3 << "\t\tError=" << err << endl; 
+        cout << "\tB0= " << b0 << " " << "\t\tB1= " << b1 << " " << "\t\tB2= " << b2 << "\t\tB3= " << b3 << "\t\tError=" << err << endl;
         error[i]=err;
-    }
-
+    } 
+    end=omp_get_wtime();  
     //custom sort based on absolute error difference
-    bubbleSort(error,17550); 
-
-
+    bubbleSort(error,3861); 
     cout << "Final Values are: " << "\tB0=" << b0 << " " << "\tB1=" << b1 << " " << "\tB2=" << b2 << "\tB3=" << b3 <<"\tError=" << error[0]<<endl;
-
+    //Time Taken
+    cout<<"Time= "<<end-start<<endl;
 }
 
 //Testing the trained Stochastic Model
@@ -161,17 +153,13 @@ int main()
     fclose(fp);
 
 
-    double start,end;
-    start=omp_get_wtime();
     //Training Phase
     train(x1, x2,x3, y);
-    end=omp_get_wtime();
 
     //Testing Phase
     double test1=0.5131, test2=-0.00015, test3=0.52099; 
     test(test1, test2, test3);
 
-    //Time Taken
-    cout<<"Time "<<end-start<<" seconds"<<endl;
+
     return 0;
 }
