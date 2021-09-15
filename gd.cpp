@@ -8,7 +8,7 @@
 using namespace std;
 
 //Variables for obtaining line of best fit
-double b[4][10530]={};
+double b[4][10530]={0.0};
 //Swapping function
 void swap(double *xp, double *yp) 
 { 
@@ -37,12 +37,12 @@ void train(double *x1,double *x2,double *x3,double *y)
     int i,idx;double error[10530]; // for storing the error values
     //Since there are 351 values in our dataset and we want to run for 50 batches so total for loop run 17550 times
     double err[10530]={0};          // for calculating error on each stage
-    double alpha = 0.01; // initializing our learning rate
+    double alpha = 0.001; // initializing our learning rate
     double e = 2.718281828;
-    double p[10530]={0},pred[10530]={0.5};
+    double p[10530]={0},pred[10530]={0};int j=0;
 
     start=omp_get_wtime();
-    #pragma omp parallel for 
+    #pragma omp parallel for private(idx) shared(x1,x2,x3)
     for (i = 0; i < 10530; i++) 
     {   
         idx = i % 10;//for accessing index after every batch
@@ -63,8 +63,8 @@ void train(double *x1,double *x2,double *x3,double *y)
     //custom sort based on absolute error difference
     end=omp_get_wtime();
     //Time Taken
-    cout<<"Time- "<<end-start<<endl;   
-    cout << "Final Values are: " << "\tB0=" << b[0][10529] << " " << "\tB1=" << b[1][10529] << " " << "\tB2=" << b[2][10529] << "\tB3=" << b[3][10529] <<"\tMinimum Error=" << abs(error[0])<<endl;
+    cout<<end-start<<endl;   
+    //cout << "Final Values are: " << "\tB0=" << b[0][10529] << " " << "\tB1=" << b[1][10529] << " " << "\tB2=" << b[2][10529] << "\tB3=" << b[3][10529] <<"\tMinimum Error=" << abs(error[0])<<endl;
 }
 
 //Testing the trained Stochastic Model
@@ -85,7 +85,7 @@ void test(double test1, double test2, double test3)
         pred = 0;
         ch='b';
     }
-    cout << "The class predicted by the model= " << ch<<endl;
+    //cout << "The class predicted by the model= " << ch<<endl;
 }
 
 int main() 
