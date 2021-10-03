@@ -1,0 +1,44 @@
+Line 24:
+Words= 2
+FLOPs= 351
+CB= 0.005698006
+
+Line 59:
+Words= 7
+FLOPs= 39312
+CB= 0.000178063
+
+Line 61:
+Words= 7
+FLOPs= 39312
+CB= 0.000178063
+
+Line 63:
+Words= 7
+FLOPs= 5616
+CB= 0.0012
+
+Line 66:
+Words= 4
+FLOPs= 28080
+CB= 0.00014245
+
+Line 67:
+Words= 5
+FLOPs= 33696
+CB= 0.000148386
+
+Line 68:
+Words= 5
+FLOPs= 33696
+CB= 0.000148386
+
+Line 69:
+Words= 5
+FLOPs= 33696
+CB= 0.000148386
+
+Line 79:
+Words= 2
+FLOPs= 33696
+CB= 0.000148386
