@@ -40,5 +40,10 @@ CB= 0.000148386
 
 Line 79:
 Words= 2
-FLOPs= 33696
-CB= 0.000148386
+FLOPs= 1
+CB= 2
+
+Line 88
+Words= 7
+FLOPs= 6
+CB= 1.166666667
